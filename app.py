@@ -1,11 +1,12 @@
 from flask import Flask
+from flask_restful import Api
+from resources.main_menu import MainMenu
+
 
 app = Flask(__name__)
+api = Api(app)
 
-
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
+api.add_resource(MainMenu, "/")
 
 
 if __name__ == '__main__':
