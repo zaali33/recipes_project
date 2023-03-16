@@ -1,1 +1,33 @@
-<h1>Main Menu screen</h1>
+{% extends 'base_template.html' %}
+{% block title %}Main - Recipes Haven{% endblock %}
+{% block content %}
+    <section class="hero-container">
+        <div class="d-flex align-items-center justify-content-around px-5 flex-wrap" style="height: 100%;">
+            <div class="col-xl-5">
+                <p class="text-fade my-2">EXPLORE</p>
+                <h2><span class="text-body">Delicious</span> <span class="text-primary">Recipes</span></h2>
+                <p class="text-body my-4">
+                    Explore the World of Flavor with Our Mouthwatering Recipes: From Savory to Sweet, Healthy to Indulgent, We've Got You Covered!
+                    You can view an extensive range of various recipes in this application
+                </p>
+                <div class="row menu-options mt-4" style="row-gap: 1.0rem;">
+                    <div class="col-xl-3 col-md-3 menu-button-div">
+                        <a class="menu-button">View/Edit Recipes</a>
+                    </div>
+                    <div class="col-xl-3 col-md-3 menu-button-div">
+                        <a class="menu-button">Add Recipes</a>
+                    </div>
+                    <div class="col-xl-3 col-md-3 menu-button-div">
+                        <a class="menu-button">Delete Recipes</a>
+                    </div>
+                    <div class="col-xl-3 col-md-3 menu-button-div">
+                        <a class="menu-button">Import/Export Recipes</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-7" style="text-align: right;">
+                <img src="/static/images/hero3.png" class="hero-img" width="500px" alt="hero image">
+            </div>
+        </div>
+    </section>
+{% endblock %}

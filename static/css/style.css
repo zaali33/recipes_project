@@ -1,0 +1,97 @@
+@font-face {
+    font-family: Sofia-pro;
+    src: url(/static/fonts/sofiapro-light.otf);
+}
+
+:root {
+    --text: #08083b;
+    --text-fade: #868899;
+    --primary: #d83132;
+    --bg: #f3f5f8;
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    font-family: Sofia-pro;
+    background-color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary)!important;
+    font-family: Sofia-pro;
+    font-weight: 700;
+}
+
+
+
+.navbar-collapse {
+    flex-grow: unset!important;
+}
+
+nav {
+    margin-right: 1.0rem;
+    margin-left: 1.0rem;
+}
+
+a.nav-link {
+    color: var(--text)!important;
+}
+
+.hero-container {
+    background-color: var(--bg);
+    margin-left: 2.0rem;
+    border-top-left-radius: 5rem;
+    border-bottom-left-radius: 1.5rem;
+    height: 87vh;
+}
+
+.text-fade {
+    color: var(--text-fade)!important;
+}
+
+.text-primary {
+    color: var(--primary)!important;
+}
+
+.text-body {
+    color: var(--text)!important;
+}
+
+a {
+    text-decoration: none;
+}
+ a:hover {
+    color: unset;
+ }
+
+.menu-button {
+    padding: 1.0rem 1.5rem;
+    border-radius: 1.0rem;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-weight: 600;
+    background-color: var(--primary);
+    border: 1px solid var(--primary);
+    color: white;
+}
+
+.menu-options> .menu-button-div:nth-of-type(odd) .menu-button {
+    background-color: var(--text);
+    border: 1px solid var(--text);
+    color: white;
+}
+
+.menu-button:hover {
+    background-color: unset;
+    color: var(--primary);
+}
+
+.menu-options> .menu-button-div:nth-of-type(odd) .menu-button:hover {
+    background-color: unset;
+    color: var(--text);
+}
