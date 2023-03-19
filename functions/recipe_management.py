@@ -47,3 +47,48 @@ class RecipeManagement:
         load_recipes_from_file('data/recipes.json')
 
         return True
+    
+    def edit_recipe(self, recipe):
+        recipe_from_file = None
+        for rec in recipe_from_file:
+            if rec.id == recipe.id:
+                recipe_from_file = rec
+                break
+        if recipe_from_file is None:
+            raiseExceptions("Recipe not found")
+        recipe_from_file.id = recipe.id
+        recipe_from_file.name = recipe.name
+        recipe_from_file.description = recipe.description
+        recipe_from_file.category = recipe.category
+        recipe_from_file.rating = recipe.rating
+        recipe_from_file.image_url = recipe.image_url
+       
+        # if not isinstance(employee.id, int):
+        #     raise Exception("Id must be an integer")
+    
+        # if isinstance(employee.id, int) and employee.id <= 0:
+        #     raise Exception("Id must be greater than 0")
+        
+        # if not isinstance(employee.name, str):
+        #     raise Exception("Name must be a string")
+    
+        # if len(employee.name) == 0:
+        #     raise Exception("Name must not be empty")
+
+        # if not isinstance(employee.age, int):
+        #     raise Exception("Age must be an integer")
+    
+        # if isinstance(employee.age, int) and employee.age <= 0:
+        #     raise Exception("Age must be greater than 0")
+        
+        # if not isinstance(employee.department, str):
+        #     raise Exception("Department must be a string")
+    
+        # if len(employee.department) == 0:
+        #     raise Exception("Department must not be empty")
+        
+        # for emp in self.employees:
+        #     if emp.id == employee.id:
+        #         raise Exception("Duplicate Employee ID")
+            
+        # self.employees.append(employee)
