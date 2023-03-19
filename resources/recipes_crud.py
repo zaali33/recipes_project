@@ -16,5 +16,5 @@ class RecipesImport(Resource):
 
     def post(self):
         recipe_management = RecipeManagement()
-        recipe_management.import_recipes()
-        return Response(response=render_template("import-success.html"))
+        result = recipe_management.import_recipes()
+        return Response(response=render_template("import-success.html", result = result))
