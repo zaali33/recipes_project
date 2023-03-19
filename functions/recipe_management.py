@@ -34,9 +34,12 @@ class RecipeManagement:
         return self.recipes
 
     def import_recipes(self):
+        #getting the file name
         f = request.files['file']
         imported_file = secure_filename(f.filename)
         f.save(os.path.join(app.config['UPLOAD_FOLDER'], imported_file))
+
+        #overwriting the new file to old file
         new_file = open(UPLOAD_FOLDER + imported_file, 'r')
         old_file = open('data/recipes.json', 'w')
         old_file.write(new_file.read())
@@ -44,6 +47,7 @@ class RecipeManagement:
         new_file.close()
         old_file.close()
 
+        #send new recipes to load function
         load_recipes_from_file('data/recipes.json')
 
         return True
