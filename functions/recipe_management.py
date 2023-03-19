@@ -1,5 +1,11 @@
 import json
+from werkzeug.utils import secure_filename
+from flask import request, Flask
+import os, os.path
 
+UPLOAD_FOLDER = 'data/'
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def load_recipes_from_file(file_path):
     f = open(file_path)
@@ -27,13 +33,30 @@ class RecipeManagement:
             self.recipes = []
         return self.recipes
 
-    def export_recipes(self):
-        save_file = open("data/export.json", "w")
-        json.dumps(self.recipes, save_file)
-        # outfile.write(json_object)
-        # outfile.close()
-        save_file.close()
 
+    def export_recipes(self):
         load_recipes_from_file('data/recipes.json')
+        #save_file = open("data/export.json", "w")
+        #json.dumps(self.recipes, save_file)
+        #save_file.close()
+
         return True
+
+    def import_recipes(self):
+        f = request.files['file']
+        imported_file = secure_filename(f.filename)
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'], imported_file))
+        new_file = open(UPLOAD_FOLDER + imported_file, 'r')
+        old_file = open('data/recipes.json', 'w')
+        old_file.write(new_file.read())
+
+        new_file.close()
+        old_file.close()
+        load_recipes_from_file('data/recipes.json')
+
+        os.remove(UPLOAD_FOLDER + imported_file)
+
+        return True
+
+
 

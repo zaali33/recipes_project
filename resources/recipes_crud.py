@@ -16,3 +16,12 @@ class Recipes_export(Resource):
         recipe_management = RecipeManagement()
         #recipes = recipe_management.export_recipes()
         return Response(response=render_template("export.html"))
+    
+class RecipesImport(Resource):
+    def get(self):
+        return Response(response=render_template("import-recipes.html"))
+
+    def post(self):
+        recipe_management = RecipeManagement()
+        recipe_management.import_recipes()
+        return Response(response=render_template("import-success.html"))
