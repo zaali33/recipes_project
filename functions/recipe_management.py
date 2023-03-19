@@ -43,9 +43,9 @@ class RecipeManagement:
 
         new_file.close()
         old_file.close()
-
         load_recipes_from_file('data/recipes.json')
 
+<<<<<<< HEAD
         return True
     
     def edit_recipe(self, recipe):
@@ -92,3 +92,8 @@ class RecipeManagement:
         #         raise Exception("Duplicate Employee ID")
             
         # self.employees.append(employee)
+=======
+        os.remove(UPLOAD_FOLDER + imported_file)
+
+        return True
+>>>>>>> 87d0277cc35e4785d336d79bc7cfb8198669ccf2
