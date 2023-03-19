@@ -26,3 +26,14 @@ class RecipeManagement:
         if self.recipes is None:
             self.recipes = []
         return self.recipes
+
+    def export_recipes(self):
+        save_file = open("data/export.json", "w")
+        json.dumps(self.recipes, save_file)
+        # outfile.write(json_object)
+        # outfile.close()
+        save_file.close()
+
+        load_recipes_from_file('data/recipes.json')
+        return True
+

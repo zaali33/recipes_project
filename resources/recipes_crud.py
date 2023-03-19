@@ -9,3 +9,10 @@ class Recipes(Resource):
         recipe_management = RecipeManagement()
         recipes = recipe_management.view_recipes()
         return Response(response=render_template("view.html", recipes=recipes))
+
+
+class Recipes_export(Resource):
+    def get(self):
+        recipe_management = RecipeManagement()
+        #recipes = recipe_management.export_recipes()
+        return Response(response=render_template("export.html"))
