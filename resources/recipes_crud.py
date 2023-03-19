@@ -12,7 +12,7 @@ class Recipes(Resource):
 
 class RecipesImport(Resource):
     def get(self):
-        return Response(response=render_template("import.html"))
+        return Response(response=render_template("import-recipes.html"))
 
     def post(self):
         recipe_management = RecipeManagement()
