@@ -7,6 +7,7 @@ UPLOAD_FOLDER = 'data/'
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
 def load_recipes_from_file(file_path):
     f = open(file_path)
     data = json.load(f)
@@ -36,27 +37,33 @@ class RecipeManagement:
 
     def export_recipes(self):
         load_recipes_from_file('data/recipes.json')
-        #save_file = open("data/export.json", "w")
-        #json.dumps(self.recipes, save_file)
-        #save_file.close()
-
+        save_file = open("data/export.json", "w")
+        json.dumps(self.recipes, save_file)
+        save_file.close()
         return True
 
     def import_recipes(self):
         f = request.files['file']
         imported_file = secure_filename(f.filename)
-        f.save(os.path.join(app.config['UPLOAD_FOLDER'], imported_file))
-        new_file = open(UPLOAD_FOLDER + imported_file, 'r')
-        old_file = open('data/recipes.json', 'w')
-        old_file.write(new_file.read())
+        split_exten = os.path.splitext(imported_file)
+        file_extension = split_exten[1]
+        # print("File Extension: ", file_extension)
+        if file_extension == ".json":
+            f.save(os.path.join(app.config['UPLOAD_FOLDER'], imported_file))
+            new_file = open(UPLOAD_FOLDER + imported_file, 'r')
+            old_file = open('data/recipes.json', 'w')
+            old_file.write(new_file.read())
 
-        new_file.close()
-        old_file.close()
-        load_recipes_from_file('data/recipes.json')
+            new_file.close()
+            old_file.close()
+            load_recipes_from_file('data/recipes.json')
+
+            os.remove(UPLOAD_FOLDER + imported_file)
+            return True
+        else:
+            return False
+
 
         os.remove(UPLOAD_FOLDER + imported_file)
 
         return True
-
-
-

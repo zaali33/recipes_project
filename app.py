@@ -1,12 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 from resources.main_menu import MainMenu
-
-from resources.recipes_crud import Recipes, Recipes_export
-
-
-from resources.recipes_crud import Recipes
-from resources.recipes_crud import RecipesImport
+from resources.recipes_crud import Recipes, Recipes_export, RecipesImport
 
 
 
