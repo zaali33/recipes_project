@@ -70,4 +70,20 @@ class RecipeManagement:
         recipe_from_file.rating = recipe.rating
         recipe_from_file.image_url = recipe.image_url
 
-        return True
+        return True    
+    
+    def add_recipe(self, recipe):
+        # recip = Recipe(recipe.name, recipe.description, recipe.category, recipe.rating)
+        counter = 1
+        with open('data/recipes.json','r+') as file:
+            file_data = json.load(file)
+            count = file_data["recipes"]
+            for x in count:
+                counter += 1
+            x = {'id':counter, 'name':recipe.name, 'description':recipe.description, 'category':recipe.category, 'rating':int(recipe.rating), 'image_url':recipe.image_url}
+            file_data["recipes"].append(x)
+            file.seek(0)
+            json.dump(file_data, file, indent = 4)
+        print(x)
+        # self.recipes.append(recipe)
+        #add to json file
