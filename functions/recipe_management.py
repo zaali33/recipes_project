@@ -36,10 +36,18 @@ class RecipeManagement:
 
 
     def export_recipes(self):
-        with open('data/recipes.json', 'r') as f:
-            data = json.load(f)
-        data.close()
-        return data
+        isExist = os.path.exists('data/recipes.json')
+        if isExist == False:
+            print('File not found ')
+            return False
+        
+        f = open('data/recipes.json', 'r')
+        save_file = json.load(f)
+        save_file.close()
+        #with open('data/recipes.json', 'r') as f:
+            #save_file = json.load(f)
+        #save_file.close()
+        return True
 
     def import_recipes(self):
         f = request.files['file']
@@ -61,8 +69,3 @@ class RecipeManagement:
             return True
         else:
             return False
-
-
-        os.remove(UPLOAD_FOLDER + imported_file)
-
-        return True
