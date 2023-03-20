@@ -37,11 +37,8 @@ class RecipeManagement:
 
     def export_recipes(self):
         with open('data/recipes.json') as recipe_file:
-            recipe_data = json.load(recipe_data)
-        #load_recipes_from_file('data/recipes.json')
-        #save_file = open("data/export.json", "w")
-        #json.dumps(self.recipes, save_file)
-        #save_file.close()
+            recipe_data = json.load(recipe_file)
+
         return recipe_data
 
     def import_recipes(self):
