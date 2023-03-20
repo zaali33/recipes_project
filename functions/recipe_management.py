@@ -1,6 +1,6 @@
 import json
 from werkzeug.utils import secure_filename
-from flask import request, Flask
+from flask import request, Flask, send_file
 import os, os.path
 
 UPLOAD_FOLDER = 'data/'
@@ -36,16 +36,12 @@ class RecipeManagement:
 
 
     def export_recipes(self):
-        with open('data/recipes.json', 'r') as file:
-            save_file = json.load(file)
-            save_file.close()
-        return save_file
-        #file = load_recipes_from_file('data/recipes.json')
-        #if os.path.exists(file):
-            #with open(file, 'r') as f:
-                #save_file = json.load(f)
-                #save_file.close()
-            #return file
+        path = "data/recipes.json"
+        return send_file(path, as_attachment=True)
+        #with open('data/recipes.json', 'r') as file:
+            #save_file = json.load(file)
+            #save_file.close()
+        #return save_file
 
     def import_recipes(self):
         f = request.files['file']
