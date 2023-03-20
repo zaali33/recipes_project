@@ -5,7 +5,6 @@ from resources.recipes_crud import Recipes
 from resources.recipes_crud import RecipesImport
 
 
-
 app = Flask(__name__)
 api = Api(app)
 

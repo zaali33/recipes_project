@@ -10,12 +10,11 @@ class Recipes(Resource):
         recipes = recipe_management.view_recipes()
         return Response(response=render_template("view.html", recipes=recipes))
 
-
 class RecipesImport(Resource):
     def get(self):
         return Response(response=render_template("import-recipes.html"))
 
     def post(self):
         recipe_management = RecipeManagement()
-        recipe_management.import_recipes()
-        return Response(response=render_template("import-success.html"))
+        result = recipe_management.import_recipes()
+        return Response(response=render_template("import-success.html", result = result))
