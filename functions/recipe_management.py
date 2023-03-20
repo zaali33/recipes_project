@@ -42,8 +42,6 @@ class RecipeManagement:
                 save_file = json.load(f)
                 save_file.close()
             return file
-        else:
-            return False
 
     def import_recipes(self):
         f = request.files['file']
