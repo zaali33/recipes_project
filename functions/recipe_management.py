@@ -36,18 +36,16 @@ class RecipeManagement:
 
 
     def export_recipes(self):
-        isExist = os.path.exists('data/recipes.json')
-        if isExist == False:
-            print('File not found ')
-            return False
-        
-        f = open('data/recipes.json', 'r')
-        save_file = json.load(f)
-        save_file.close()
+        file = open(load_recipes_from_file('data/recipes.json'))
+        if os.path.exists(file):
+            with open(file, 'r') as f:
+                save_file = json.load(f)
+                save_file.close()
+            return True
+
         #with open('data/recipes.json', 'r') as f:
             #save_file = json.load(f)
         #save_file.close()
-        return True
 
     def import_recipes(self):
         f = request.files['file']
