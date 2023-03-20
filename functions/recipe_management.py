@@ -36,12 +36,16 @@ class RecipeManagement:
 
 
     def export_recipes(self):
-        file = load_recipes_from_file('data/recipes.json')
-        if os.path.exists(file):
-            with open(file, 'r') as f:
-                save_file = json.load(f)
-                save_file.close()
-            return file
+        with open('data/recipes.json', 'r') as file:
+            save_file = json.load(file)
+            save_file.close()
+        return save_file
+        #file = load_recipes_from_file('data/recipes.json')
+        #if os.path.exists(file):
+            #with open(file, 'r') as f:
+                #save_file = json.load(f)
+                #save_file.close()
+            #return file
 
     def import_recipes(self):
         f = request.files['file']
