@@ -14,8 +14,7 @@ class Recipes(Resource):
 class Recipes_export(Resource):
     def get(self):
         recipe_management = RecipeManagement()
-        result = recipe_management.export_recipes()
-        return Response(response=render_template("import-recipes.html", result = result))
+        return recipe_management.export_recipes()
     
 class RecipesImport(Resource):
     def get(self):
