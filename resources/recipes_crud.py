@@ -3,7 +3,7 @@ from flask import Response, render_template, request, redirect
 from functions.recipe_management import RecipeManagement, Recipe
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, IntegerField, HiddenField
-from wtforms.validators import DataRequired, NumberRange
+from wtforms.validators import DataRequired, NumberRange, InputRequired
 
 
 class RecipeForm(FlaskForm):
@@ -32,19 +32,36 @@ class RecipesImport(Resource):
 
 class RecipeAdd(Resource):
     def get(self):
-        return Response(response=render_template("add-recipe.html"))
+        recipe_form = RecipeForm()
+        return Response(response=render_template("add-recipe.html", recipe_form=recipe_form))
     
     def post(self):
-        recipe = Recipe(id,name=request.form['recipeName'],
-                        #   ingredients=request.form['recipeIngredients'],
-                          description=request.form['recipeInstructions'],
-                          category=request.form['recipeCategory'],
-                          rating=request.form['recipeRating'],
-                          image_url=request.form['recipeImage'])
+        # recipe = Recipe(id,name=request.form['recipeName'],
+        #                 #   ingredients=request.form['recipeIngredients'],
+        #                   description=request.form['recipeInstructions'],
+        #                   category=request.form['recipeCategory'],
+        #                   rating=request.form['recipeRating'],
+        #                   image_url=request.form['recipeImage'])
 
+        # recipe_management = RecipeManagement()
+        # result = recipe_management.add_recipe(recipe)
+        # return Response(response=render_template("added-success.html", result = result))
+    
+        recipe_form = RecipeForm()
         recipe_management = RecipeManagement()
-        result = recipe_management.add_recipe(recipe)
-        return Response(response=render_template("added-success.html", result = result))
+        if recipe_form.validate_on_submit():
+            recipe = Recipe(  
+            id,name=recipe_form.data.get("name"),
+        #   ingredients=request.form['recipeIngredients'],
+            description=recipe_form.data.get("description"),
+            category=recipe_form.data.get("category"),
+            rating=recipe_form.data.get("rating"),
+            image_url=recipe_form.data.get("image_url"))          
+            recipe_management.add_recipe(recipe)
+            return redirect("/recipes")
+        else:
+            # recipe = recipe_management.get_recipe(recipe_form.data.get('id'))
+            return Response(response=render_template('add-recipe.html', recipe_form=recipe_form))
 
 class RecipesEdit(Resource):
     def get(self, id):
