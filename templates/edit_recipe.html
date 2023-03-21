@@ -1,0 +1,49 @@
+{% extends 'base_template.html' %}
+{% block title %}Edit - Recipes Haven{% endblock %}
+{% block content %}
+    <section class="section my-2">
+        <h4>Edit {{ recipe.name }}</h4>
+        <form class="form col-xl-6" action="/edit"  method="post" enctype="multipart/form-data">
+            {{ recipe_form.csrf_token }}
+            {{ recipe_form.id }}
+            <div class="form-group my-2">
+                {{ recipe_form.name.label }}
+                {{ recipe_form.name(class="form-control", placeholder="Name") }}
+                {% for error in recipe_form.name.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group my-2">
+                {{ recipe_form.category.label }}
+                {{ recipe_form.category(class="form-control", placeholder="Category") }}
+                {% for error in recipe_form.category.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group my-2">
+                {{ recipe_form.description.label }}
+                {{ recipe_form.description(class="form-control", placeholder="Description") }}
+                {% for error in recipe_form.description.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group my-2">
+                {{ recipe_form.rating.label }}
+                {{ recipe_form.rating(class="form-control", placeholder="Rating") }}
+                {% for error in recipe_form.rating.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group my-2">
+                {{ recipe_form.image_url.label }}
+                {{ recipe_form.image_url(class="form-control", placeholder="Image URL") }}
+                {% for error in recipe_form.image_url.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group my-2">
+                <button class="menu-button menu-button-primary my-4" type="submit">Save</button>
+            </div>
+        </form>
+    </section>
+{% endblock %}
