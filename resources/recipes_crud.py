@@ -24,7 +24,7 @@ class RecipeAdd(Resource):
         return Response(response=render_template("add-recipe.html"))
     
     def post(self):
-        recipe = Recipe(id='2',name=request.form['recipeName'],
+        recipe = Recipe(id,name=request.form['recipeName'],
                         #   ingredients=request.form['recipeIngredients'],
                           description=request.form['recipeInstructions'],
                           category=request.form['recipeCategory'],
@@ -32,5 +32,5 @@ class RecipeAdd(Resource):
                           image_url=request.form['recipeImage'])
 
         recipe_management = RecipeManagement()
-        recipe_management.add_recipe(recipe)
-        return Response(response=render_template("added-success.html"))
+        result = recipe_management.add_recipe(recipe)
+        return Response(response=render_template("added-success.html", result = result))

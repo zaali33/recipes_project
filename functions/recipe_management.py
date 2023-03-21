@@ -74,16 +74,25 @@ class RecipeManagement:
     
     def add_recipe(self, recipe):
         # recip = Recipe(recipe.name, recipe.description, recipe.category, recipe.rating)
-        counter = 1
-        with open('data/recipes.json','r+') as file:
-            file_data = json.load(file)
-            count = file_data["recipes"]
-            for x in count:
-                counter += 1
-            x = {'id':counter, 'name':recipe.name, 'description':recipe.description, 'category':recipe.category, 'rating':int(recipe.rating), 'image_url':recipe.image_url}
-            file_data["recipes"].append(x)
-            file.seek(0)
-            json.dump(file_data, file, indent = 4)
-        print(x)
+            print (recipe.name)
+            print (recipe.description)
+            print (recipe.category)
+            print (recipe.rating)
+            print (recipe.image_url)
+        # if (tyrecipe.:
+            counter = 1
+            with open('data/recipes.json','r+') as file:
+                file_data = json.load(file)
+                count = file_data["recipes"]
+                for x in count:
+                    counter += 1
+                x = {'id':counter, 'name':recipe.name, 'description':recipe.description, 'category':recipe.category, 'rating':int(recipe.rating), 'image_url':recipe.image_url}
+                file_data["recipes"].append(x)
+                file.seek(0)
+                json.dump(file_data, file, indent = 4)
+            print(x)
+            return True
+        # else:
+        #     return False
         # self.recipes.append(recipe)
         #add to json file
