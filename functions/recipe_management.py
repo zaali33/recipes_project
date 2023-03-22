@@ -25,6 +25,7 @@ class Recipe:
         self.image_url = image_url
 
 
+
 class RecipeManagement:
     def __init__(self):
         self.recipes = load_recipes_from_file('data/recipes.json')
@@ -62,7 +63,7 @@ class RecipeManagement:
                 recipe_from_file = rec
                 break
         if recipe_from_file is None:
-            raiseExceptions("Recipe not found")
+            raise Exception("Recipe not found")
         recipe_from_file.id = recipe.id
         recipe_from_file.name = recipe.name
         recipe_from_file.description = recipe.description
@@ -71,3 +72,34 @@ class RecipeManagement:
         recipe_from_file.image_url = recipe.image_url
 
         return True
+
+    def delete_recipe(self, id):
+        # print(id)
+        is_found = False
+        for i, recipe in enumerate(self.recipes):
+            # print(recipe["id"])
+            if recipe["id"] == int(id):
+                print(recipe["id"])
+                is_found = True
+                del self.recipes[i]
+
+                # delete from recipes.json file
+                updated_data = {"recipes": []}
+                with open("data/recipes.json", "r") as f:
+                    data = json.load(f)
+                for item in data["recipes"]:
+                    if item["id"] != int(id):
+                        # print(item["id"])
+                        updated_data["recipes"].append(
+                            {"id": item["id"],
+                             "name": item["name"],
+                             "description": item["description"],
+                             "category": item["category"],
+                             "rating": item["rating"],
+                             "image_url": item["image_url"]}
+                        )
+                with open("data/recipes.json", 'w') as f:
+                    json.dump(updated_data, f)
+                break
+        if not is_found:
+            raise Exception("no recipe found")

@@ -1,5 +1,5 @@
 from flask_restful import Resource
-from flask import Response, render_template
+from flask import Response, render_template, redirect, request
 from functions.recipe_management import RecipeManagement
 
 
@@ -10,6 +10,7 @@ class Recipes(Resource):
         recipes = recipe_management.view_recipes()
         return Response(response=render_template("view.html", recipes=recipes))
 
+
 class RecipesImport(Resource):
     def get(self):
         return Response(response=render_template("import-recipes.html"))
@@ -17,4 +18,15 @@ class RecipesImport(Resource):
     def post(self):
         recipe_management = RecipeManagement()
         result = recipe_management.import_recipes()
-        return Response(response=render_template("import-success.html", result = result))
+        return Response(response=render_template("import-success.html", result=result))
+
+
+class RecipeDelete(Resource):
+    def get(self):
+        recipe_management = RecipeManagement()
+        id = request.args.get("id")
+        try:
+            recipe_management.delete_recipe(id)
+        except:
+            return redirect("/recipes")
+        return redirect("/recipes")
