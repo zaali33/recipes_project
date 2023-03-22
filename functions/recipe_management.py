@@ -56,22 +56,62 @@ class RecipeManagement:
         else:
             return False
 
-    def edit_recipe(self, recipe):
-        recipe_from_file = None
-        for rec in recipe_from_file:
-            if rec.id == recipe.id:
-                recipe_from_file = rec
-                break
-        if recipe_from_file is None:
-            raise Exception("Recipe not found")
-        recipe_from_file.id = recipe.id
-        recipe_from_file.name = recipe.name
-        recipe_from_file.description = recipe.description
-        recipe_from_file.category = recipe.category
-        recipe_from_file.rating = recipe.rating
-        recipe_from_file.image_url = recipe.image_url
+    def get_recipe(self, id):
+        recipe = None
+        for rec in self.recipes:
+            if rec["id"] == id:
+                recipe = rec
+        return recipe
+    
+    def add_recipe(self, recipe):
+        # recip = Recipe(recipe.name, recipe.description, recipe.category, recipe.rating)
+            print (recipe.name)
+            print (recipe.description)
+            print (recipe.category)
+            print (recipe.rating)
+            print (recipe.image_url)
+        # if (tyrecipe.:
+            counter = 1
+            with open('data/recipes.json','r+') as file:
+                file_data = json.load(file)
+                count = file_data["recipes"]
+                for x in count:
+                    counter += 1
+                x = {'id':counter, 'name':recipe.name, 'description':recipe.description, 'category':recipe.category, 'rating':int(recipe.rating), 'image_url':recipe.image_url}
+                file_data["recipes"].append(x)
+                file.seek(0)
+                json.dump(file_data, file, indent = 4)
+            print(x)
+            return True
+        # else:
+        #     return False
+        # self.recipes.append(recipe)
+        #add to json file
 
-        return True
+    def edit_recipe(self, id, name, description, category, rating, image_url):
+        int_id = int(id)
+        recipe = self.get_recipe(int_id)
+        if recipe:
+            recipe["name"] = name
+            recipe["description"] = description
+            recipe["category"] = category
+            recipe["rating"] = rating
+            recipe["image_url"] = image_url
+            # save data into data.json file
+            with open("data/recipes.json", "r") as f:
+                data = json.load(f)
+            for item in data["recipes"]:
+                if item["id"] == int_id:
+                    item["name"] = recipe["name"]
+                    item["description"] = recipe["description"]
+                    item["category"] = recipe["category"]
+                    item["rating"] = recipe["rating"]
+                    item["image_url"] = recipe["image_url"]
+            with open("data/recipes.json", 'w') as f:
+                json.dump(data, f)
+
+        else:
+            raise Exception("No recipe found")
 
     def delete_recipe(self, id):
         # print(id)

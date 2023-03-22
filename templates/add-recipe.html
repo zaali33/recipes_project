@@ -1,0 +1,63 @@
+{% extends 'base_template.html' %}
+{% block title %}Add - Recipes Haven{% endblock %}
+{% block content %}
+<section class="section my-2">
+    <h4>Add A Recipe</h4>
+    <form class="form col-xl-6" action="/add-recipe" method="post" enctype="multipart/form-data">
+        {{ recipe_form.csrf_token }}
+        <div class="form-group my-2">
+            {{ recipe_form.name.label }}
+            {{ recipe_form.name(class="form-control", placeholder="Name") }}
+            {% if recipe_form.name.errors %}
+            {% for error in recipe_form.name.errors %}
+            <small class="text-danger">{{ error }}</small>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="form-group my-2">
+            {{ recipe_form.description.label }}
+            {{ recipe_form.description(class="form-control", placeholder="Description") }}
+            {% if recipe_form.description.errors %}
+            {% for error in recipe_form.description.errors %}
+            <small class="text-danger">{{ error }}</small>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="form-group my-2">
+            {{ recipe_form.category.label }}
+            {{ recipe_form.category(class="form-control", placeholder="Category") }}
+            {% if recipe_form.category.errors %}
+            {% for error in recipe_form.category.errors %}
+            <small class="text-danger">{{ error }}</small>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="form-group my-2">
+            {{ recipe_form.rating.label }}
+            {{ recipe_form.rating(class="form-control", placeholder="Rating") }}
+            {% if recipe_form.rating.errors %}
+            {% for error in recipe_form.rating.errors %}
+            <small class="text-danger">{{ error }}</small>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="form-group my-2">
+            {{ recipe_form.image_url.label }}
+            {{ recipe_form.image_url(class="form-control", placeholder="Image URL") }}
+            {% if recipe_form.image_url.errors %}
+            {% for error in recipe_form.image_url.errors %}
+            <small class="text-danger">{{ error }}</small>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="form-group my-2">
+            <button class="menu-button menu-button-primary my-4" type="submit">Submit</button>
+        </div>
+    </form>
+</section>
+{% endblock %}
