@@ -9,10 +9,16 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 def load_recipes_from_file(file_path):
-    f = open(file_path)
-    data = json.load(f)
-    f.close()
-    return data['recipes']
+    if os.path.isfile(file_path):
+        try:
+            f = open(file_path)
+            data = json.load(f)
+            f.close()
+            return data['recipes']
+        except:
+            raise Exception("File is not a valid json file")
+    else:
+        raise Exception("File does not exist")
 
 
 class Recipe:
