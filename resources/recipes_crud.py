@@ -109,7 +109,10 @@ class RecipesImport(Resource):
     def post(self):
         recipe_management = RecipeManagement()
         result = recipe_management.import_recipes()
-        return Response(response=render_template("import-success.html", result=result))
+        if result:
+            return Response(response=render_template("import-success.html", result=result))
+        else:
+            return Response(response=render_template("import-success.html", result=False))
 
 
 class RecipeDelete(Resource):

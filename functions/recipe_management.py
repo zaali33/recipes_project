@@ -91,7 +91,6 @@ class RecipeManagement:
                 os.remove(UPLOAD_FOLDER + imported_file)
                 return False
         else:
-            raise Exception("File is not valid")
             return False
 
     # this import method is for testing purposes
