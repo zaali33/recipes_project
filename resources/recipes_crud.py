@@ -3,7 +3,7 @@ from flask import Response, render_template, redirect, request
 from functions.recipe_management import RecipeManagement, Recipe
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, IntegerField, HiddenField
-from wtforms.validators import DataRequired, NumberRange, InputRequired
+from wtforms.validators import DataRequired, NumberRange, InputRequired, Optional
 
 
 class RecipeForm(FlaskForm):
@@ -14,13 +14,29 @@ class RecipeForm(FlaskForm):
     category = StringField(label="Category", validators=[DataRequired()])
     rating = IntegerField(label="Rating", validators=[NumberRange(1, 5)])
 
+class RecipeSearchForm(FlaskForm):
+    name = StringField(label="Name")
+    category = StringField(label="Category")
+    rating = IntegerField(label="Rating", validators=[Optional()])
+
 # view (get) and add (post) functions will be called in this class
 class Recipes(Resource):
     def get(self):
         recipe_management = RecipeManagement()
         recipes = recipe_management.view_recipes()
-        return Response(response=render_template("view.html", recipes=recipes))
-
+        recipe_search_form = RecipeSearchForm()
+        return Response(response=render_template("view.html", recipes=recipes, recipe_search_form=recipe_search_form))
+    
+    def post(self):
+        recipe_search_form = RecipeSearchForm()
+        if recipe_search_form.validate_on_submit():
+            recipe_management = RecipeManagement()
+            filtered_recipes = recipe_management.filter_recipes(
+                recipe_search_form.data.get("name"), recipe_search_form.data.get("category"), recipe_search_form.data.get("rating")
+            )
+            return Response(response=render_template("view.html", recipes=filtered_recipes, recipe_search_form=recipe_search_form))
+        else:
+            return Response(response=render_template('view.html', recipe_search_form=recipe_search_form))
 
 class Recipes_export(Resource):
     def get(self):
