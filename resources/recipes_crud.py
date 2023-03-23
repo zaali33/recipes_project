@@ -3,7 +3,7 @@ from flask import Response, render_template, redirect, request
 from functions.recipe_management import RecipeManagement, Recipe
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, IntegerField, HiddenField
-from wtforms.validators import DataRequired, NumberRange, InputRequired
+from wtforms.validators import DataRequired, NumberRange, InputRequired, Optional
 
 
 class RecipeForm(FlaskForm):
@@ -17,7 +17,7 @@ class RecipeForm(FlaskForm):
 class RecipeSearchForm(FlaskForm):
     name = StringField(label="Name")
     category = StringField(label="Category")
-    rating = IntegerField(label="Rating")
+    rating = IntegerField(label="Rating", validators=[Optional()])
 
 # view (get) and add (post) functions will be called in this class
 class Recipes(Resource):

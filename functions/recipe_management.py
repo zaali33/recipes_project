@@ -42,9 +42,13 @@ class RecipeManagement:
         return self.recipes
 
     def filter_recipes(self, name, category, rating):
-        if int(rating):
+        if rating == None:
+            rating = ""
+        int_rating = rating
+        if rating and int(rating):
             int_rating = int(rating)
-        filtered = [r for r in self.recipes if name.lower() in r["name"].lower() and category.lower() in r["category"] .lower() and int_rating == r["rating"]]
+        print(rating)
+        filtered = [r for r in self.recipes if name.lower() in r["name"].lower() and category.lower() in r["category"] .lower() and (rating == ""  or int_rating == r["rating"]) ]
         return filtered;
 
 
