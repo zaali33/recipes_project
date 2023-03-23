@@ -15,6 +15,10 @@ class TestRecipes(unittest.TestCase):
         file_path = "data/recipes_test.json"
         with self.assertRaises(Exception):
             load_recipes_from_file(file_path)
+    
+    def test_valid_json_load_recipes(self):
+        file_path = "data/recipes.json"
+        
 
     def test_invalid_json_imported_recipes(self):
         file_path = "data/test_wrong_extension.pdf"
