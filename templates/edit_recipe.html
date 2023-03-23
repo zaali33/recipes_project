@@ -2,7 +2,10 @@
 {% block title %}Edit - Recipes Haven{% endblock %}
 {% block content %}
     <section class="section my-2">
-        <h4>Edit {{ recipe.name }}</h4>
+        <div class="page-header my-2">
+            <h4 class="text-body mb-2">Edit {{ recipe.name }}</h4>
+            <a href="/" class="text-body"><i class="fa-solid fa-arrow-left"></i> Back to Main Menu</a>
+        </div>
         <form class="form col-xl-6" action="/edit"  method="post" enctype="multipart/form-data">
             {{ recipe_form.csrf_token }}
             {{ recipe_form.id }}

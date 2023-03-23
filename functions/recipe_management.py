@@ -33,7 +33,7 @@ class Recipe:
 
 class RecipeManagement:
     def __init__(self):
-        self.recipes = load_recipes_from_file('data/recipes.json')
+        self.recipes = load_recipes_from_file("data/recipes.json")
 
     def view_recipes(self):
         if self.recipes is None:
