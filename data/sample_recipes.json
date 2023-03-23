@@ -1,0 +1,20 @@
+{
+  "recipes": [
+    {
+      "id": 1,
+      "name": "Pinky Delicious Macaron",
+      "description": "Delicious French macarons are delicate sandwich cookies with a crisp exterior and filled with flavours.",
+      "category": "desserts",
+      "rating": 4,
+      "image_url": "https://img3.goodfon.com/wallpaper/nbig/3/fe/eda-macaron-vypechka-pechene.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Soft Tender Donuts",
+      "description": "A recipe of Fluffy and tasty donuts that look adorable with a bright colored glaze ",
+      "category": "desserts",
+      "rating": 5,
+      "image_url": "https://sugargeekshow.com/wp-content/uploads/2020/10/baked_donut_recipe_featured.jpg"
+    }
+  ]
+}

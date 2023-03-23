@@ -42,6 +42,7 @@ class RecipeManagement:
 
     def export_recipes(self):
         return send_file('data/recipes.json', as_attachment=True)
+        return True
 
     def import_recipes(self):
         f = request.files['file']
@@ -63,6 +64,7 @@ class RecipeManagement:
             else:
                 new_file.close()
                 os.remove(UPLOAD_FOLDER + imported_file)
+                return False
         else:
             raise Exception("File is not valid")
             return False
