@@ -6,6 +6,39 @@
             <h4 class="text-body mb-2">Our Recipes</h4>
             <a href="/" class="text-body"><i class="fa-solid fa-arrow-left"></i> Back to Main Menu</a>
         </div>
+        <form action="/recipes" method="post" class="row spaced-row mb-4">
+            {{ recipe_search_form.csrf_token }}
+            <div class="form-group my-2 col-xl-3">
+                {{ recipe_search_form.name.label }}
+                {{ recipe_search_form.name(class="form-control", placeholder="Name") }}
+                {% if recipe_search_form.name.errors %}
+                {% for error in recipe_search_form.name.errors %}
+                <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group my-2 col-xl-3">
+                {{ recipe_search_form.category.label }}
+                {{ recipe_search_form.category(class="form-control", placeholder="Category") }}
+                {% if recipe_search_form.category.errors %}
+                {% for error in recipe_search_form.category.errors %}
+                <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group my-2 col-xl-3">
+                {{ recipe_search_form.rating.label }}
+                {{ recipe_search_form.rating(class="form-control", placeholder="Rating") }}
+                {% if recipe_search_form.rating.errors %}
+                {% for error in recipe_search_form.rating.errors %}
+                <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="col-xl-2 mt-2" style="align-self: center;">
+                <button type="submit">Search</button>
+            </div>
+        </form>
         <div class="row spaced-row" style="column-gap: 1.0rem;">
             {% for recipe in recipes %}
                 <div class="col-xl-4 bordered-card my-2">

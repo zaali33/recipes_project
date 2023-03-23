@@ -41,6 +41,12 @@ class RecipeManagement:
             self.recipes = []
         return self.recipes
 
+    def filter_recipes(self, name, category, rating):
+        if int(rating):
+            int_rating = int(rating)
+        filtered = [r for r in self.recipes if name.lower() in r["name"].lower() and category.lower() in r["category"] .lower() and int_rating == r["rating"]]
+        return filtered;
+
 
     def export_recipes(self):
         return send_file('data/recipes.json', as_attachment=True)
