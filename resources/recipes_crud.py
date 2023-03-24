@@ -128,4 +128,3 @@ class RecipeDelete(Resource):
         except:
             return redirect("/delete_recipe")
         return redirect("/delete_recipe")
-
