@@ -114,4 +114,18 @@ class RecipesImport(Resource):
         else:
             return Response(response=render_template("import-success.html", result=False))
 
+class RecipeDelete(Resource):
+    def get(self):
+        recipe_management = RecipeManagement()
+        recipes = recipe_management.view_recipes()
+        return Response(response=render_template("delete_recipe.html", recipes=recipes))
+
+    def post(self):
+        recipe_management = RecipeManagement()
+        id = request.args.get("id")
+        try:
+            recipe_management.delete_recipe(id)
+        except:
+            return redirect("/delete_recipe")
+        return redirect("/delete_recipe")
 
