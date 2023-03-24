@@ -107,8 +107,9 @@ class RecipesImport(Resource):
         return Response(response=render_template("import-recipes.html"))
 
     def post(self):
+        f = request.files['file']
         recipe_management = RecipeManagement()
-        result = recipe_management.import_recipes()
+        result = recipe_management.import_recipes(f)
         if result:
             return Response(response=render_template("import-success.html", result=result))
         else:

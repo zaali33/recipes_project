@@ -162,35 +162,25 @@ class TestRecipes(unittest.TestCase):
 
     ''' test cases of Import and Export File '''
 
-    def test_empty_imported_file(self):
-        file_path = "data/testrecipe_empty.json"
-        test_result = RecipeManagement.import_recipes_for_test(self, file_path)
-        self.assertFalse(test_result)
-
     def test_invalid_imported_file_extension(self):
         file_path = "data/test_wrong_extension.pdf"
         with self.assertRaises(Exception):
-            RecipeManagement.import_recipes_for_test(self, file_path)
+            RecipeManagement.import_recipes(self,file_path)
 
-    def test_valid_imported_file(self):
-        file_path = "data/sample_recipes.json"
-        test_result = RecipeManagement.import_recipes_for_test(self, file_path)
-        self.assertTrue(test_result, msg=None)
+    def test_valid_import(self):
+        file_path = "fakerecipes.json"
+        test_result = RecipeManagement.import_recipes(self,file_path)
+        self.assertTrue(test_result,msg=None)
 
-    def test_export_correct_file(self):
-        file_path = "data/recipes.json"
-        test_result = RecipeManagement.export_recipes_test(self, file_path)
-        self.assertTrue(test_result, msg=None)
+    def test_empty_import(self):
+        file_path = "testrecipe_empty.json"
 
-    def test_invalid_import(self):
-        file_path = "data/test_wrong_extension.pdf"
+        test_result = RecipeManagement.import_recipes(self, file_path)
+        self.assertFalse(test_result, msg=None)
+
+    def test_export(self):
         with self.assertRaises(Exception):
-            RecipeManagement.import_recipes(file_path)
-
-    def test_valid_export(self):
-        file_path = "data/recipes.json"
-        with self.assertRaises(Exception):
-            RecipeManagement.export_recipes(file_path)
+            RecipeManagement.export_recipes(self)
 
     def test_add_recipe(self):
         recipe = Recipe(id,

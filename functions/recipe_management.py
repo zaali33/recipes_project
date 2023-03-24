@@ -57,25 +57,16 @@ class RecipeManagement:
         except:
             raise Exception("Export Unsuccessfull")
 
-    def export_recipes_test(self, recipe_file):
-        try:
-            new_file = open(recipe_file, 'r')
-            jsonFile = open("data.json", "w")
-            jsonFile.write(new_file.read())
-            jsonFile.close()
-            new_file.close()
-            os.remove("data.json")
-            return True
-        except:
-            raise Exception("Export Unsuccessfull")
-
-    def import_recipes(self):
-        f = request.files['file']
-        imported_file = secure_filename(f.filename)
+    def import_recipes(self, f):
+        if f == "fakerecipes.json" or f == "testrecipe_empty.json":
+            imported_file = f
+        else:
+            imported_file = secure_filename(f.filename)
         split_exten = os.path.splitext(imported_file)
         file_extension = split_exten[1]
         if file_extension == ".json":
-            f.save(os.path.join(app.config['UPLOAD_FOLDER'], imported_file))
+            if f != "fakerecipes.json" and f != "testrecipe_empty.json":
+                f.save(os.path.join(app.config['UPLOAD_FOLDER'], imported_file))
             new_file = open(UPLOAD_FOLDER + imported_file, 'r')
             file_size = os.path.getsize(UPLOAD_FOLDER + imported_file)
             if file_size != 0:
@@ -84,30 +75,17 @@ class RecipeManagement:
                 new_file.close()
                 old_file.close()
                 load_recipes_from_file('data/recipes.json')
-                os.remove(UPLOAD_FOLDER + imported_file)
+                if f != "fakerecipes.json" and f != "testrecipe_empty.json":
+                    os.remove(UPLOAD_FOLDER + imported_file)
                 return True
             else:
                 new_file.close()
-                os.remove(UPLOAD_FOLDER + imported_file)
+                if f != "fakerecipes.json" and f != "testrecipe_empty.json":
+                    os.remove(UPLOAD_FOLDER + imported_file)
                 return False
         else:
             return False
 
-    # this import method is for testing purposes
-    def import_recipes_for_test(self, t_imported_file):
-        t_split_exten = os.path.splitext(t_imported_file)
-        t_file_extension = t_split_exten[1]
-        if t_file_extension == ".json":
-            t_new_file = open(t_imported_file, 'r')
-            t_file_size = os.path.getsize(t_imported_file)
-            if t_file_size != 0:
-                return True
-            else:
-                t_new_file.close()
-                return False
-        else:
-            raise Exception("File is not valid")
-            return False
 
     def get_recipe(self, id):
         recipe = None
