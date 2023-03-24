@@ -160,3 +160,44 @@ class TestRecipes(unittest.TestCase):
         test_result = RecipeManagement.export_recipes_test(self, file_path)
         self.assertTrue(test_result, msg=None)
 
+    def test_invalid_import(self):
+        file_path = "data/test_wrong_extension.pdf"
+        with self.assertRaises(Exception):
+            RecipeManagement.import_recipes(file_path)
+
+    def test_valid_export(self):
+        file_path = "data/recipes.json"
+        with self.assertRaises(Exception):
+            RecipeManagement.export_recipes(file_path)
+
+    def test_add_recipe(self):
+        recipe = {'name': 'Banana Milkshake', 'description': 'Thick and creamy Homemade Banana Milkshake recipe thats bursting with fresh banana flavor.', 'category': 'Drinks',
+                    'rating': 5, 'image_url': 'https://foodtasia.com/wp-content/uploads/2021/07/banana-milkshake-40b-683x1024.jpg'}
+        with self.assertRaises(Exception):
+            RecipeManagement.add_recipe(recipe)
+            
+    def test_null_add_recipe(self):
+        recipe = None
+        with self.assertRaises(Exception):
+            RecipeManagement.add_recipe(recipe)
+
+    def test_edit_recipe(self):
+        id = 2
+        name = "Banana Milkshake" 
+        description = "Thick and creamy Homemade Banana Milkshake recipe that’s bursting with fresh banana flavor."
+        category = "Drinks"
+        rating = 5
+        image_url = "https://foodtasia.com/wp-content/uploads/2021/07/banana-milkshake-40b-683x1024.jpg"
+        with self.assertRaises(Exception):
+            RecipeManagement.edit_recipe(id, name, description, category, rating, image_url)
+
+    def test_edit_nonexistant_recipe(self):
+        id = 5
+        name = "Banana Milkshake" 
+        description = "Thick and creamy Homemade Banana Milkshake recipe that’s bursting with fresh banana flavor."
+        category = "Drinks"
+        rating = 5
+        image_url = "https://foodtasia.com/wp-content/uploads/2021/07/banana-milkshake-40b-683x1024.jpg"
+        with self.assertRaises(Exception):
+            RecipeManagement.edit_recipe(id, name, description, category, rating, image_url)
+
