@@ -122,7 +122,6 @@ class RecipeManagement:
                 # print(recipe["id"])
                 is_found = True
                 del self.recipes[i]
-
                 # delete from recipes.json file
                 updated_data = {"recipes": []}
                 with open("data/recipes.json", "r") as f:
