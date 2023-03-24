@@ -1,20 +1,20 @@
 {
     "recipes": [
-      {
-        "id": 1,
-        "name": "Mix Berry Smoothie",
-        "description": "A delicious and healthy blended drink made from a variety of fresh or frozen berries",
-        "category": "desserts",
-        "rating": 5,
-        "image_url": "https://www.jessicagavin.com/wp-content/uploads/2020/07/berry-smoothie-8-1200.jpg"
-      },
-      {
-        "id": 2,
-        "name": "Frozen Yogurt Bark",
-        "description": "A tasty and healthy snack that is made from a base of creamy yogurt, typically Greek yogurt, and frozen fruit. ",
-        "category": "desserts",
-        "rating": 4,
-        "image_url": "https://www.notenoughcinnamon.com/wp-content/uploads/2021/03/Healthy-Frozen-Yogurt-Bark-3-500x500.jpg"
-      }
+        {
+            "id": 1,
+            "name": "Mix Berry Smoothie",
+            "description": "A delicious and healthy blended drink made from a variety of fresh or frozen berries",
+            "category": "desserts",
+            "rating": 5,
+            "image_url": "https://www.jessicagavin.com/wp-content/uploads/2020/07/berry-smoothie-8-1200.jpg"
+        },
+        {
+            "id": 2,
+            "name": "Frozen Yogurt Bark",
+            "description": "A tasty and healthy snack that is made from a base of creamy yogurt, typically Greek yogurt, and frozen fruit. ",
+            "category": "desserts",
+            "rating": 4,
+            "image_url": "https://www.notenoughcinnamon.com/wp-content/uploads/2021/03/Healthy-Frozen-Yogurt-Bark-3-500x500.jpg"
+        }
     ]
 }
