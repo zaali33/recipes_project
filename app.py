@@ -19,4 +19,4 @@ api.add_resource(RecipeAdd, "/add-recipe")
 api.add_resource(RecipesEdit, "/edit", "/edit/<int:id>")
 
 if __name__ == '__main__':
-    app.run(port='5001')
+    app.run()
