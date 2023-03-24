@@ -114,6 +114,7 @@ class RecipeManagement:
             raise Exception("No recipe found")
 
     def delete_recipe(self, id):
+        # print(id)
         is_found = False
         for i, recipe in enumerate(self.recipes):
             # print(recipe["id"])
