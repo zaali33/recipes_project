@@ -182,6 +182,16 @@ class TestRecipes(unittest.TestCase):
         test_result = RecipeManagement.export_recipes_test(self, file_path)
         self.assertTrue(test_result, msg=None)
 
+    def test_invalid_import(self):
+        file_path = "data/test_wrong_extension.pdf"
+        with self.assertRaises(Exception):
+            RecipeManagement.import_recipes(file_path)
+
+    def test_valid_export(self):
+        file_path = "data/recipes.json"
+        with self.assertRaises(Exception):
+            RecipeManagement.export_recipes(file_path)
+
     def test_add_recipe(self):
         recipe = Recipe(id,
                         name="Banana Milkshake",

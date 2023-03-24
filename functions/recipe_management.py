@@ -173,14 +173,14 @@ class RecipeManagement:
         for i, recipe in enumerate(self.recipes):
             # print(recipe["id"])
             if recipe["id"] == int(id):
-                print(recipe["id"])
+                # print(recipe["id"])
                 is_found = True
                 del self.recipes[i]
-
                 # delete from recipes.json file
                 updated_data = {"recipes": []}
                 with open("data/recipes.json", "r") as f:
                     data = json.load(f)
+
                 for item in data["recipes"]:
                     if item["id"] != int(id):
                         # print(item["id"])
@@ -192,8 +192,10 @@ class RecipeManagement:
                             "rating": item["rating"],
                             "image_url": item["image_url"]}
                         )
+
                 with open("data/recipes.json", 'w') as f:
                     json.dump(updated_data, f)
                 break
+
         if not is_found:
             raise Exception("no recipe found")
