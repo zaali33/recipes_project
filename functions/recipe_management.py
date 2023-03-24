@@ -33,7 +33,7 @@ class Recipe:
 
 class RecipeManagement:
     def __init__(self):
-        self.recipes = load_recipes_from_file('data/recipes.json')
+        self.recipes = load_recipes_from_file("data/recipes.json")
 
     def view_recipes(self):
         if self.recipes is None:
@@ -52,8 +52,22 @@ class RecipeManagement:
 
 
     def export_recipes(self):
-        return send_file('data/recipes.json', as_attachment=True)
-        return True
+        try:
+            return send_file('data/recipes.json', as_attachment=True)
+        except:
+            raise Exception("Export Unsuccessfull")
+
+    def export_recipes_test(self, recipe_file):
+        try:
+            new_file = open(recipe_file, 'r')
+            jsonFile = open("data.json", "w")
+            jsonFile.write(new_file.read())
+            jsonFile.close()
+            new_file.close()
+            os.remove("data.json")
+            return True
+        except:
+            raise Exception("Export Unsuccessfull")
 
     def import_recipes(self):
         f = request.files['file']
@@ -77,9 +91,23 @@ class RecipeManagement:
                 os.remove(UPLOAD_FOLDER + imported_file)
                 return False
         else:
-            raise Exception("File is not valid")
             return False
 
+    # this import method is for testing purposes
+    def import_recipes_for_test(self, t_imported_file):
+        t_split_exten = os.path.splitext(t_imported_file)
+        t_file_extension = t_split_exten[1]
+        if t_file_extension == ".json":
+            t_new_file = open(t_imported_file, 'r')
+            t_file_size = os.path.getsize(t_imported_file)
+            if t_file_size != 0:
+                return True
+            else:
+                t_new_file.close()
+                return False
+        else:
+            raise Exception("File is not valid")
+            return False
 
     def get_recipe(self, id):
         recipe = None
