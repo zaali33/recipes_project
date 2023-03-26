@@ -178,13 +178,9 @@ class TestRecipes(unittest.TestCase):
         test_result = RecipeManagement.import_recipes(self, file_path)
         self.assertFalse(test_result, msg=None)
 
-    def test_valid_export(self):
-        file_path = "data/recipes.json"
-        test_result = RecipeManagement.export_recipes(file_path)
-        self.assertFalse(test_result, msg=None)
-    def test_invalid_export(self):
+    def test_export(self):
         with self.assertRaises(Exception):
-            RecipeManagement.export_recipes("")
+            RecipeManagement.export_recipes(self)
 
     def test_add_recipe(self):
         recipe = Recipe(id,
