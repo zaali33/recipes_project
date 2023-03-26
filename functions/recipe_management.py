@@ -51,9 +51,10 @@ class RecipeManagement:
         return filtered;
 
 
-    def export_recipes(self):
+    def export_recipes(self, filepath):
         try:
-            return send_file('data/recipes.json', as_attachment=True)
+            return send_file(filepath, as_attachment=True)
+            return True
         except:
             raise Exception("Export Unsuccessfull")
 

@@ -41,7 +41,8 @@ class Recipes(Resource):
 class Recipes_export(Resource):
     def get(self):
         recipe_management = RecipeManagement()
-        return recipe_management.export_recipes()
+        filepath = "data/recipes.json"
+        return recipe_management.export_recipes(filepath)
     
 class RecipeAdd(Resource):
     def get(self):
